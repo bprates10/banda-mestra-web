@@ -1,0 +1,15 @@
+form {
+  background: #FFFABA;
+  /* background: #000; */
+  border: 2px solid #FFAB05;
+  /* border: 2px solid #fff; */
+}
+
+form>input {
+  border: 1px solid #FFAB05;
+  /* border: 1px solid #fff; */
+}
+
+img {
+  width: 1499px;
+}
