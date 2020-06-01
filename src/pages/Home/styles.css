@@ -5,7 +5,7 @@
   width: 20%;
 }
 
-.my-grafics {
+.two-columns {
   display: flex;
   flex-direction: row;
 }
@@ -54,7 +54,7 @@ input {
 }
 
 /* atributos da div dos gráficos */
-.my-grafics {
+.two-columns {
   background-color: #FFFABA;
   /* background-color: #fff; */
   border: 2px solid #FFAB05;

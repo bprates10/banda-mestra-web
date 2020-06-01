@@ -12,26 +12,29 @@ import './styles.css'
 import 'rodal/lib/rodal.css';
 
 // include charts
-import Skills from "../../components/SkillChart"
-import Events from "../../components/EventChart"
+// import Skills from "../../components/SkillChart"
+// import Events from "../../components/EventChart"
 
 // importando modais
 // import ModalCreateEvent from '../../components/ModalCreateEvent.jsx';
 // import ModalFindEvent from '../../components/ModalFindEvent.jsx';
 
 // include icons
-// import { Person, Explore, SportsEsports } from '@material-ui/icons';
+import { Person, Explore, SportsEsports } from '@material-ui/icons';
+import PlusOneIcon from '@material-ui/icons/PlusOne';
 
-function App() {
+function App(props) {
 
   const [listPlayers, setListPlayers] = useState([])
   const isDisabled = true
   // state da modal
   // const [dropdown, setDropdown] = useState("")
   // variavel que define o estilo da camada main
-  const [mainStyle, setMainStyle] = useState({})
+  // const [mainStyle, setMainStyle] = useState({})
   // variavel que define se os gráficos estarão ocultos
   const [isHidden, setIsHidden] = useState(false)
+
+  const [visible, setVisible] = useState(false)
 
   async function getPlayer() {
 
@@ -55,17 +58,25 @@ function App() {
 
   }
 
-  const showModal = () => {
-    setIsHidden(!isHidden)
+  // const showModal = () => {
+  //   setIsHidden(!isHidden)
+  // }
+
+  const show = () => {
+    setVisible(true)
+  }
+
+  const hide = () => {
+    setVisible(false)
   }
 
   useEffect(() => {
-    getPlayer()
+    // getPlayer()
   }, [])
 
   return (
 
-    <div id="main" style={mainStyle}>
+    <div id="main">
       <div className="navbar">
 
         <img src={listPlayers.avatar_url} alt="Imagem de Perfil" />
@@ -84,7 +95,7 @@ function App() {
         </div>
       </div>
 
-      <div className="my-grafics">
+      <div className="two-columns">
 
         <div className="my-stats">
           <p>Minhas Estatísticas</p>
@@ -92,7 +103,7 @@ function App() {
           <div className="container-main">
 
             <div className="graph">
-              <Skills stats={listPlayers.skills} />
+              {/* <Skills stats={listPlayers.skills} /> */}
             </div>
 
             <div className="descriptions">
@@ -101,13 +112,13 @@ function App() {
               <p>Último Evento Participado: - </p>
               <p>Total de Eventos Participados: 0 </p>
               <p>Total de Eventos Finalizados: 0 </p>
-              <button type="button" className="btn btn-map" onClick={showModal}>Meu Mapa</button>
+              {/* <button type="button" className="btn btn-map" onClick={show}>Meu Mapa</button> */}
               {/* <ModalMap className={dropdown} /> */}
               {/* <button onClick={some} onClose={some}>show</button> */}
 
-              <Rodal closeOnEsc={true} animation={'flip'} width={1000} height={600} visible={isHidden}>
+              {/* <Rodal visible={visible} onClose={hide} animation={'flip'} width={1000} height={800}>
                 <Map />
-              </Rodal>
+              </Rodal> */}
             </div>
           </div>
 
@@ -120,7 +131,7 @@ function App() {
           <div className="container-main">
 
             <div className="graph" hidden={isHidden}>
-              <Events />
+              {/* <Events /> */}
             </div>
 
             <div className="descriptions">
@@ -140,9 +151,14 @@ function App() {
       </div>
 
       <div className="icon-navbar-left">
-        {/* <div title="Mapa" style={{ color: 'red' }} onClick={genericFunction}><Explore /></div>
-        <div tittle="Perfil" style={{ color: 'orange' }} onClick={genericFunction}><Person /></div>
-        <div title="Eventos" style={{ color: 'green' }} onClick={genericFunction}><SportsEsports /></div> */}
+        <div title="Mapa" style={{ color: 'red' }} onClick={() => props.history.push('/maps')}><Explore /></div>
+        <div title="Perfil" style={{ color: 'orange' }} onClick={() => props.history.push('/profile')}><Person /></div>
+        <div title="Eventos" style={{ color: 'green' }} onClick={() => props.history.push('/events')}><SportsEsports /></div>
+        <div title="Adicionar Evento" style={{ color: 'green' }} onClick={[]}><PlusOneIcon /></div>
+        {/* <button onClick={() => props.history.push('/maps')}
+                  type="button"
+                  className={'btn btn-info'}
+                >teste</button> */}
       </div>
     </div >
   );

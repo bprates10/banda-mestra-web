@@ -1,14 +1,16 @@
 import styled from "styled-components";
-import { darken } from "polished";
+import {
+  darken
+} from "polished";
 
-export const Container = styled.div`
+export const Container = styled.div `
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div `
   position: absolute;
   bottom: 20px;
   right: 10px;
@@ -17,8 +19,8 @@ export const ButtonContainer = styled.div`
 `;
 
 
-export const PointReference = styled.div`
-  position: relative;
+export const PointReference = styled.div `
+  position: absolute;
   top: 0;
   width: 100vw;
   height: 100vh;
@@ -27,9 +29,10 @@ export const PointReference = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  fa-map-marker {
+  fa-map-marker-alt {
     color: red;
     border: 5px solid blue;
+    font-size: 7.5rem;
   }
   i {
     color: #fc6963;

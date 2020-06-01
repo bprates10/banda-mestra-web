@@ -4,6 +4,7 @@ import { logout } from "../../services/auth";
 import Dimensions from "react-dimensions";
 import MapGL from "react-map-gl";
 import PropTypes from "prop-types";
+import { ModalRoute } from "react-router-modal";
 
 import Button from "../../components/Button";
 import { Container, ButtonContainer, PointReference } from "./styles";
@@ -12,6 +13,10 @@ import debounce from "lodash/debounce";
 import api from "../../services/api";
 
 import Events from "../../components/Events";
+import AddEvent from "../AddEvent";
+
+import AddLocationIcon from '@material-ui/icons/AddLocation';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const TOKEN =
   "pk.eyJ1IjoiYnByYXRlczEwIiwiYSI6ImNrYW9tZWtvMDA0eWcycHF5Mmw2eGFvaWwifQ.HSBDN-VZnZbrfx1YpljnCg";
@@ -86,9 +91,11 @@ class Map extends Component {
           onClick={() => this.setState({ addActivate: true })}
         >
           <i className="fa fa-plus" />
+          <AddLocationIcon />
         </Button>
         <Button color="#222" onClick={this.handleLogout}>
           <i className="fa fa-times" />
+          <ExitToAppIcon />
         </Button>
       </ButtonContainer>
     );
@@ -100,7 +107,7 @@ class Map extends Component {
         <PointReference>
           <i className="fa fa-map-marker" />
           <div>
-            <button onClick={this.handleAddProperty} type="button">
+            <button onClick={this.handleAddEvent} type="button">
               Adicionar
             </button>
             <button
@@ -131,8 +138,14 @@ class Map extends Component {
         >
           <Events events={events} />
         </MapGL>
+        {!addActivate && <Events match={match} events={events} />}
         {this.renderActions()}
         {this.renderButtonAdd()}
+        <ModalRoute
+          path={`${match.url}/events/add`}
+          parentPath={match.url}
+          component={AddEvent}
+        />
       </Fragment>
     );
   }
