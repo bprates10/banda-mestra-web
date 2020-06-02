@@ -79,8 +79,8 @@ class Map extends Component {
   };
 
   handleLogout = e => {
-    logout();
-    this.props.history.push("/");
+    // logout();
+    this.props.history.push("/home");
   };
 
   renderActions() {
@@ -138,14 +138,14 @@ class Map extends Component {
         >
           <Events events={events} />
         </MapGL>
-        {!addActivate && <Events match={match} events={events} />}
+        {/* {!addActivate && <Events match={match} events={events} />} */}
         {this.renderActions()}
         {this.renderButtonAdd()}
-        <ModalRoute
+        {/* <ModalRoute
           path={`${match.url}/events/add`}
           parentPath={match.url}
           component={AddEvent}
-        />
+        /> */}
       </Fragment>
     );
   }

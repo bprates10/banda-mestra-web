@@ -10,32 +10,32 @@ import Home from "./pages/Home/index.jsx"
 import Maps from "./pages/Maps/index.jsx"
 import Events from "./pages/Events/index.jsx"
 
-const PrivateRoute = ({ component: Component,...rest }) => ( 
-  <Route { ...rest } render = {
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={
     props =>
-    // isAuthenticated() ? (
-    <Component { ...props } />
-    // ) : (
-    // <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-    // )
+      isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        )
   }
   />
 );
 
-const Routes = () => ( 
+const Routes = () => (
   <BrowserRouter >
     <Fragment >
       <Switch >
-        <Route exact path = "/" component = {SignIn}/>  
-        <Route path = "/signup" component = { SignUp } />  
-        <Route path = "/signup" component = { SignUp } />  
-        <PrivateRoute path = "/home" component = { Home } />  
-        <PrivateRoute path = "/maps" component = { Maps } />  
-        <PrivateRoute path = "/events" component = { Events } />  
-        <Route path = "*" component = { () => < h1 > Page not found </h1> } />
-      </Switch>  
+        <Route exact path="/" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/signup" component={SignUp} />
+        <PrivateRoute path="/home" component={Home} />
+        <PrivateRoute path="/maps" component={Maps} />
+        <PrivateRoute path="/events" component={Events} />
+        <Route path="*" component={() => < h1 > Page not found </h1>} />
+      </Switch>
       <ModalContainer />
-    </Fragment> 
+    </Fragment>
   </ BrowserRouter >
 );
 

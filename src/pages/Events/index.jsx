@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api'
-// import Rodal from 'rodal';
-// import Map from '../Maps/index'
 
 // include css
 import '../../styles/global.css'
@@ -9,9 +7,8 @@ import '../../styles/navbar.css'
 import '../../styles/body.css'
 import '../../styles/main.css'
 import './styles.css'
-// import 'rodal/lib/rodal.css';
 
-function Events() {
+function Events(props) {
 
   const [listEvents, setListEvents] = useState([])
   const [visible, setVisible] = useState(false)
@@ -39,7 +36,7 @@ function Events() {
     }
 
   }
-  
+
   const show = () => {
     setVisible(true)
   }
@@ -48,8 +45,10 @@ function Events() {
     setVisible(false)
   }
 
+
+
   useEffect(() => {
-    // getEvents()
+    getEvents()
   }, [])
 
   return (
@@ -59,12 +58,25 @@ function Events() {
       <div className="two-columns">
 
         <div className="my-stats">
-          <p>Meus Eventos</p>
+          <p>Criar Evento</p>
           <br />
           <div className="container-main">
 
-            <div className="graph">
-              {/* <Skills stats={listPlayers.skills} /> */}
+            <div className="descriptions">
+              <p>Nome do Evento:</p>
+              <input type="text" placeholder="Nome do Evento" />
+              <br />
+              <p>Descrição do Evento:</p>
+              <textarea style={{ border: '1px dashed palegreen' }} />
+              <br />
+              <p>Tabuleiro Selecionado:</p>
+              <select>
+                <option>Jogo 1</option>
+                <option>Jogo 1</option>
+                <option>Jogo 1</option>
+                <option>Jogo 1</option>
+              </select>
+              <br />
             </div>
 
             <div className="descriptions">
@@ -112,9 +124,7 @@ function Events() {
       </div>
 
       <div className="icon-navbar-left">
-        {/* <div title="Mapa" style={{ color: 'red' }} onClick={genericFunction}><Explore /></div>
-        <div tittle="Perfil" style={{ color: 'orange' }} onClick={genericFunction}><Person /></div>
-        <div title="Eventos" style={{ color: 'green' }} onClick={genericFunction}><SportsEsports /></div> */}
+        <p>BOTÃO VOLTAR</p>
       </div>
     </div >
   );

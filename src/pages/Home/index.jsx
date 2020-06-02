@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api'
-import Rodal from 'rodal';
-import Map from '../Maps/index'
+// import Rodal from 'rodal';
+// import Map from '../Maps/index'
 
 // include css
 import '../../styles/global.css'
@@ -20,21 +20,20 @@ import 'rodal/lib/rodal.css';
 // import ModalFindEvent from '../../components/ModalFindEvent.jsx';
 
 // include icons
-import { Person, Explore, SportsEsports } from '@material-ui/icons';
-import PlusOneIcon from '@material-ui/icons/PlusOne';
+// import { Person, Explore, SportsEsports } from '@material-ui/icons';
+// import PlusOneIcon from '@material-ui/icons/PlusOne';
+import { Explore, SportsEsports } from '@material-ui/icons';
 
 function App(props) {
 
   const [listPlayers, setListPlayers] = useState([])
   const isDisabled = true
-  // state da modal
-  // const [dropdown, setDropdown] = useState("")
-  // variavel que define o estilo da camada main
-  // const [mainStyle, setMainStyle] = useState({})
-  // variavel que define se os gráficos estarão ocultos
-  const [isHidden, setIsHidden] = useState(false)
-
+  const isHidden = false
   const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    console.log("listPlayers => ", listPlayers)
+  }, [listPlayers])
 
   async function getPlayer() {
 
@@ -51,16 +50,19 @@ function App(props) {
     }
     catch (error) {
       setListPlayers({
-        avatar_url: 'https://img.ibxk.com.br/ns/quizpop/2015/03/10/10175754730000.png'
+        created_at: "2020-05-20 22:43:11",
+        email: "bprates10@gmail.com",
+        id: 1,
+        username: "bprates10 FIXO",
+        avatar_url: 'https://img.ibxk.com.br/ns/quizpop/2015/03/10/10175754730000.png',
+        nome: "Nome Fixo",
+        biography: "Biografia fixa."
       })
+
       console.log("error =>", error)
     }
 
   }
-
-  // const showModal = () => {
-  //   setIsHidden(!isHidden)
-  // }
 
   const show = () => {
     setVisible(true)
@@ -71,7 +73,7 @@ function App(props) {
   }
 
   useEffect(() => {
-    // getPlayer()
+    getPlayer()
   }, [])
 
   return (
@@ -87,11 +89,11 @@ function App(props) {
           <label>Nome:</label>
           <input type="text" disabled={{ isDisabled }} value={listPlayers.name} />
           <label>Level:</label>
-          <input type="text" className="input-small" value={listPlayers.level} disabled={{ isDisabled }} />
+          <input type="text" className="input-small" value={99} disabled={{ isDisabled }} />
           <label className="label-rating">Rating:</label>
-          <input type="text" className="input-small" value={listPlayers.rating} disabled={{ isDisabled }} />
+          <input type="text" className="input-small" value={99} disabled={{ isDisabled }} />
           <label>Biografia:</label>
-          <textarea type="text" value={listPlayers.bio} style={{ height: 100, padding: '3%' }} disabled={{ isDisabled }} />
+          <textarea type="text" value={listPlayers.biography} style={{ height: 100, padding: '3%' }} disabled={{ isDisabled }} />
         </div>
       </div>
 
@@ -152,13 +154,9 @@ function App(props) {
 
       <div className="icon-navbar-left">
         <div title="Mapa" style={{ color: 'red' }} onClick={() => props.history.push('/maps')}><Explore /></div>
-        <div title="Perfil" style={{ color: 'orange' }} onClick={() => props.history.push('/profile')}><Person /></div>
+        {/* <div title="Perfil" style={{ color: 'orange' }} onClick={() => props.history.push('/profile')}><Person /></div> */}
         <div title="Eventos" style={{ color: 'green' }} onClick={() => props.history.push('/events')}><SportsEsports /></div>
-        <div title="Adicionar Evento" style={{ color: 'green' }} onClick={[]}><PlusOneIcon /></div>
-        {/* <button onClick={() => props.history.push('/maps')}
-                  type="button"
-                  className={'btn btn-info'}
-                >teste</button> */}
+        {/* <div title="Adicionar Evento" style={{ color: 'green' }} onClick={[]}><PlusOneIcon /></div> */}
       </div>
     </div >
   );
