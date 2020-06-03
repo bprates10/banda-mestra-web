@@ -55,8 +55,8 @@ function Profile() {
     <div id="main">
 
       <div className="container-photo-profile">
-
-        <img src={listPlayers.avatar_url} alt="Imagem de Perfil" />
+        {/* listPlayers.avatar_url */}
+        <img src={"https://dummyimage.com/100x100/fff/"} alt="Imagem de Perfil" />
 
       </div>
 
@@ -91,7 +91,7 @@ function Profile() {
 
           <div className="my-events">
 
-            <p>Avaliar Jogadores:</p>
+            <p>Avaliar Eventos:</p>
             <br />
             <div className="descriptions">
               {/* todo... */}
