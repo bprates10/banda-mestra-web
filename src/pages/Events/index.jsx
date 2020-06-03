@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api'
 
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+
 // include css
 import '../../styles/global.css'
 import '../../styles/navbar.css'
@@ -37,30 +45,72 @@ function Events(props) {
 
   }
 
-  const show = () => {
-    setVisible(true)
-  }
-
-  const hide = () => {
-    setVisible(false)
-  }
-
-
-
   useEffect(() => {
     getEvents()
   }, [])
+  
+  const marks = [
+    {
+      value: 10,
+      label: '1',
+    },
+    {
+      value: 20,
+      label: '2',
+    },
+    {
+      value: 30,
+      label: '3',
+    },
+    {
+      value: 40,
+      label: '4',
+    },
+    {
+      value: 50,
+      label: '5',
+    },
+    {
+      value: 60,
+      label: '6',
+    },
+    {
+      value: 70,
+      label: '7',
+    },
+    {
+      value: 80,
+      label: '8',
+    },
+    {
+      value: 90,
+      label: '9',
+    },
+    {
+      value: 100,
+      label: '10',
+    },
+  ];
+  
+  function valuetext(value) {
+    return `${value}`;
+  }
+  
+  function valueLabelFormat(value) {
+    return marks.findIndex((mark) => mark.value === value) + 1;
+  }
 
   return (
 
     <div id="main">
 
-      <div className="two-columns">
+      <div className="grid-events">
 
         <div className="my-stats">
-          <p>Criar Evento</p>
+          
+          <p style={{color: '#fff'}}>Criar Evento</p>
           <br />
-          <div className="container-main">
+          <div className="container-events-create">
 
             <div className="descriptions">
               <p>Nome do Evento:</p>
@@ -69,62 +119,54 @@ function Events(props) {
               <p>Descrição do Evento:</p>
               <textarea style={{ border: '1px dashed palegreen' }} />
               <br />
-              <p>Tabuleiro Selecionado:</p>
-              <select>
-                <option>Jogo 1</option>
-                <option>Jogo 1</option>
-                <option>Jogo 1</option>
-                <option>Jogo 1</option>
-              </select>
+              <p>Observações do Evento:</p>
+              <textarea style={{ border: '1px dashed palegreen' }} />
+              <br />
               <br />
             </div>
 
             <div className="descriptions">
-              <p>Avaliação Média (rating): 3 </p>
-              <p>Melhor Evento Participado: - </p>
-              <p>Último Evento Participado: - </p>
-              <p>Total de Eventos Participados: 0 </p>
-              <p>Total de Eventos Finalizados: 0 </p>
-              <button type="button" className="btn btn-map" onClick={show}>Meu Mapa</button>
-              {/* <ModalMap className={dropdown} /> */}
-              {/* <button onClick={some} onClose={some}>show</button> */}
+              <p>Tabuleiro Selecionado:</p>
+              <select>
+                <option>1</option>
+                <option>1</option>
+                <option>1</option>
+                <option>1</option>
+              </select>
 
-              {/* <Rodal visible={visible} onClose={hide} animation={'flip'} width={1000} height={800}>
-                <Map />
-              </Rodal> */}
+              <Typography id="discrete-slider-restrict" gutterBottom>
+                Número de Jogadores:
+              </Typography>
+              <Slider
+                defaultValue={20}
+                valueLabelFormat={valueLabelFormat}
+                getAriaValueText={valuetext}
+                aria-labelledby="discrete-slider-restrict"
+                step={null}
+                valueLabelDisplay="auto"
+                marks={marks}
+              />
+
+              <FormControlLabel
+                control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
+                label="Restrição"
+              />
+
+              <p>Endereço:</p>
+              <input type="text" placeholder="Longitude" />
+              <input type="text" placeholder="latitude" />
+
             </div>
+          
+          <div>
+            <button type="button" className="btn btn-add-event" onClick={[]}>Adicionar</button>
+            <button type="button" className="btn btn-search-event" onClick={[]}>Voltar</button>
+          </div>
+          
           </div>
 
         </div>
 
-        <div className="my-events">
-          <p>Meus Eventos</p>
-          <br />
-
-          <div className="container-main">
-
-            <div className="graph">
-              {/* <Events /> */}
-            </div>
-
-            <div className="descriptions">
-              <p>Avaliação Média (rating) de Eventos: 0 </p>
-              <p>Melhor Evento Criado: N/A</p>
-              <p>Último Evento Criado: N/A</p>
-              <p>Total de Eventos Criados: 0</p>
-              <p>Total de Eventos Finalizados: 0</p>
-              {/* <button type="button" className="btn btn-add-event" onClick={showDropdown}>Criar Evento</button> */}
-              {/* <ModalCreateEvent className={dropdown} name={listPlayers.name} /> */}
-              {/* <button type="button" className="btn btn-search-event" onClick={showDropdown}>Procurar Evento</button> */}
-              {/* <ModalFindEvent className={dropdown} name={listPlayers.name} /> */}
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div className="icon-navbar-left">
-        <p>BOTÃO VOLTAR</p>
       </div>
     </div >
   );

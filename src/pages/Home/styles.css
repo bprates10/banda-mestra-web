@@ -1,3 +1,12 @@
+#main {
+  background-color: #CDCED1;
+  background-image: url('../../assets/root-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  width: 100%;
+}
+
 /* detalhes da barra de navegação lateral */
 .navbar {
   display: block;
@@ -13,7 +22,7 @@
 /* atributos da imagem do perfil */
 .navbar>img {
   border-radius: 50%;
-  border: 16px solid #FFB460;
+  border: 16px solid #006064;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -25,8 +34,7 @@
 
 /* atributos do form */
 .form-data {
-  background-color: #FFB460;
-  /* background-color: #000; */
+  background-color: #006064;
   padding: 3%;
 }
 
@@ -55,9 +63,8 @@ input {
 
 /* atributos da div dos gráficos */
 .two-columns {
-  background-color: #FFFABA;
-  /* background-color: #fff; */
-  border: 2px solid #FFAB05;
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
   display: flex;
   flex-direction: column;
   padding: 1%;
@@ -94,14 +101,12 @@ input {
 
 /* botao criar evento */
 .btn-add-event {
-  background-color: #FFB460;
-  /* background-color: #000; */
+  background-color: #006064;
 }
 
 /* botao procurar evento */
 .btn-search-event {
-  background-color: #FFAB05;
-  /* background-color: #000; */
+  background-color: #006064;
 }
 
 /* botao mapa */
@@ -129,9 +134,8 @@ input {
 }
 
 .descriptions {
-  background-color: #ffffff;
-  border: 2px solid #FFAB05;
-  /* border: 2px solid #000; */
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
   padding: 2%;
   width: 50%;
 }
@@ -149,8 +153,8 @@ input {
 }
 
 .graph {
-  background-color: #ffffff;
-  border: 2px solid #FFAB05;
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
   width: 50%;
 }
 
@@ -167,9 +171,8 @@ input {
 
 /* barra de icones da esquerda */
 .icon-navbar-left {
-  background-color: #FFFABA;
-  /* background-color: #fff; */
-  border: 2px solid #FFAB05;
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -6,7 +6,7 @@
 }
 
 body, html {
-  background: #eee;
+  background: #C8E6C9;
   font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
@@ -26,7 +26,7 @@ body, html {
 form {
   height: 500px;
   width: 30%;
-  background: #FFAB05;
+  background: #A7FFEB;
   padding: 30px;
   display: flex;
   flex-direction: column;

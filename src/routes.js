@@ -9,15 +9,16 @@ import SignIn from "./pages/SignIn/index.jsx"
 import Home from "./pages/Home/index.jsx"
 import Maps from "./pages/Maps/index.jsx"
 import Events from "./pages/Events/index.jsx"
+import Profile from "./pages/Profile/index.jsx"
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={
     props =>
-      isAuthenticated() ? (
+      // isAuthenticated() ? (
         <Component {...props} />
-      ) : (
-          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-        )
+      // ) : (
+      //     <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      //   )
   }
   />
 );
@@ -32,6 +33,7 @@ const Routes = () => (
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/maps" component={Maps} />
         <PrivateRoute path="/events" component={Events} />
+        <PrivateRoute path="/profile" component={Profile} />
         <Route path="*" component={() => < h1 > Page not found </h1>} />
       </Switch>
       <ModalContainer />
