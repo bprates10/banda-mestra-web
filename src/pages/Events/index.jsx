@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api'
 
+import TextField from '@material-ui/core/TextField';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -10,10 +13,10 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 // include css
-import '../../styles/global.css'
-import '../../styles/navbar.css'
-import '../../styles/body.css'
-import '../../styles/main.css'
+// import '../../styles/global.css'
+// import '../../styles/navbar.css'
+// import '../../styles/body.css'
+// import '../../styles/main.css'
 import './styles.css'
 
 function Events(props) {
@@ -48,7 +51,7 @@ function Events(props) {
   useEffect(() => {
     getEvents()
   }, [])
-  
+
   const marks = [
     {
       value: 10,
@@ -91,41 +94,53 @@ function Events(props) {
       label: '10',
     },
   ];
-  
+
   function valuetext(value) {
     return `${value}`;
   }
-  
+
   function valueLabelFormat(value) {
     return marks.findIndex((mark) => mark.value === value) + 1;
   }
 
   return (
 
-    <div id="main">
+    <div id="events">
 
-      <div className="grid-events">
+      <div className="events-content">
 
         <div className="my-stats">
-          
-          <p style={{color: '#fff'}}>Criar Evento</p>
-          <br />
-          <div className="container-events-create">
 
-            <div className="descriptions">
+          <p style={{ color: '#fff' }}>Criar Evento</p>
+          <br />
+          <div className="events-create">
+
+            <div className="events-descriptions">
               <p>Nome do Evento:</p>
-              <input type="text" placeholder="Nome do Evento" />
+              <TextField id="outlined-basic" label="Nome do Evento" variant="outlined" style={{ width: '60%' }} />
               <br />
               <p>Descrição do Evento:</p>
-              <textarea style={{ border: '1px dashed palegreen' }} />
+              {/* <textarea style={{ border: '1px dashed palegreen' }} /> */}
+              <TextareaAutosize
+                rowsMax={4}
+                aria-label="maximum height"
+                placeholder="Escreva aqui uma descrição para o evento :)"
+                style={{ backgroundColor: 'transparent', height: 100, width: '60%' }}
+              />
               <br />
               <p>Observações do Evento:</p>
-              <textarea style={{ border: '1px dashed palegreen' }} />
+              {/* <textarea style={{ border: '1px dashed palegreen' }} /> */}
+              <TextareaAutosize
+                rowsMax={4}
+                aria-label="maximum height"
+                placeholder="Escreva aqui as observações (por exemplo, levar um refri ou salgadinho é legal :)"
+                style={{ backgroundColor: 'transparent', height: 100, width: '60%' }}
+              />
               <br />
               <br />
             </div>
 
-            <div className="descriptions">
+            <div className="events-descriptions">
               <p>Tabuleiro Selecionado:</p>
               <select>
                 <option>1</option>
@@ -157,12 +172,12 @@ function Events(props) {
               <input type="text" placeholder="latitude" />
 
             </div>
-          
-          <div>
-            <button type="button" className="btn btn-add-event" onClick={[]}>Adicionar</button>
-            <button type="button" className="btn btn-search-event" onClick={[]}>Voltar</button>
-          </div>
-          
+
+            <div>
+              <button type="button" className="btn btn-add-event" onClick={[]}>Adicionar</button>
+              <button type="button" className="btn btn-search-event" onClick={[]}>Voltar</button>
+            </div>
+
           </div>
 
         </div>

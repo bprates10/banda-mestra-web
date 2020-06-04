@@ -1,54 +1,115 @@
-#main {
-  background-color: #CDCED1;
+/* page attrs */
+.home {
+  align-items: center;
   background-image: url('../../assets/root-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
+  justify-content: center;
   width: 100%;
+  height: 100vh;
 }
 
-/* detalhes da barra de navegação lateral */
-.navbar {
+/* NAVBAR */
+/* navbar attrs */
+.navbar-home {
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-radius: 3%;
   display: block;
-  padding: 2%;
-  width: 20%;
+  height: 85%;
+  margin-left: 1%;
+  width: 25%;
 }
 
-.two-columns {
-  display: flex;
-  flex-direction: row;
-}
-
-/* atributos da imagem do perfil */
-.navbar>img {
+/* navbar photo attrs */
+.navbar-photo-profile {
   border-radius: 50%;
   border: 16px solid #006064;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 17%;
+  margin-top: 10%;
   margin-bottom: 10%;
   width: 160px;
   height: 160px;
 }
 
-/* atributos do form */
-.form-data {
+/* navbar form attrs */
+.navbar-form {
   background-color: #006064;
-  padding: 3%;
+  border-bottom-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  margin: 2%;
+  padding: 2%;
 }
 
-.form-data>p {
-  font-family: cursive;
-  font-size: 24px;
-  text-align: center
-}
-
-/* atributos dos inputs pequenos */
-.form-data>.input-small {
+.navbar-form>.input-small {
   margin-left: 5%;
   width: 20%;
 }
+
+.navbar-form>input {
+  margin-bottom: 5%;
+  padding-left: 3%;
+}
+
+/* BODY */
+.body-home {
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  margin-left: 1%;
+  padding: 1%;
+  width: 60%;
+}
+
+.home-body-content {
+  display: flex;
+  flex-direction: row;
+  max-height: 240px;
+}
+
+.home-descriptions {
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-bottom-right-radius: 3%;
+  border-top-right-radius: 3%;
+  padding: 2%;
+  width: 50%;
+}
+
+.home-descriptions>p {
+  font-weight: bold;
+  margin-top: 2%;
+}
+
+.home-card {
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-bottom-left-radius: 3%;
+  border-top-left-radius: 3%;
+  width: 50%;
+}
+
+.navbar-home-left {
+  align-items: center;
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  justify-content: space-between;
+  margin-left: 1%;
+  padding: 1%;
+  width: 5%;
+}
+
+
 
 /* atributos de espaçamento dos labels do form */
 .label-rating {
@@ -56,29 +117,9 @@
 }
 
 /* atributos de espaçamento dos inputs do form */
-input {
-  margin-bottom: 5%;
-  padding-left: 3%;
-}
 
-/* atributos da div dos gráficos */
-.two-columns {
-  background-color: #C8E6C9;
-  border: 2px solid #006064;
-  display: flex;
-  flex-direction: column;
-  padding: 1%;
-  margin: 2%;
-  width: 65%;
-}
 
-/* atributos da div minhas estatisticas */
-.my-stats {
-  /* padding-top: 2%; */
-  padding-left: 2%;
-  /* background-color: red; */
-  width: 100%;
-}
+
 
 .my-stats>p {
   font-family: cursive;
@@ -120,44 +161,6 @@ input {
   color: white;
 }
 
-/* atributos da div meus eventos */
-.my-events {
-  padding-top: 2%;
-  padding-left: 2%;
-  width: 100%;
-}
-
-.my-events>p {
-  font-family: cursive;
-  font-size: 24px;
-  text-align: center
-}
-
-.descriptions {
-  background-color: #C8E6C9;
-  border: 2px solid #006064;
-  padding: 2%;
-  width: 50%;
-}
-
-.descriptions>p {
-  font-family: cursive;
-  font-weight: bold;
-  margin-top: 2%;
-}
-
-.container-main {
-  display: flex;
-  flex-direction: row;
-  max-height: 240px;
-}
-
-.graph {
-  background-color: #C8E6C9;
-  border: 2px solid #006064;
-  width: 50%;
-}
-
 /* atributos dos charts */
 .recharts-surface {
   /* max-width: 75%; */
@@ -167,23 +170,4 @@ input {
 .recharts-wrapper {
   height: 200px;
   width: 100% !important;
-}
-
-/* barra de icones da esquerda */
-.icon-navbar-left {
-  background-color: #C8E6C9;
-  border: 2px solid #006064;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2%;
-  margin-top: 2%;
-  padding-bottom: 10%;
-  padding-top: 10%;
-  width: 5%;
-}
-
-.show {
-  display: block !important;
 }

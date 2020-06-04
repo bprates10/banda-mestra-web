@@ -1,15 +1,23 @@
-form {
-  background: #FFFABA;
-  /* background: #000; */
-  border: 2px solid #FFAB05;
-  /* border: 2px solid #fff; */
+.signIn {
+  align-items: center;
+  background-image: url('../../assets/background.pkm-1.jpg');
+  background-repeat: no-repeat;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
 }
 
-form>input {
-  border: 1px solid #FFAB05;
-  /* border: 1px solid #fff; */
+.signIn>form {
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-radius: 5%;
 }
 
-img {
-  width: 1499px;
+.signIn>form>img {
+  margin: 10px 0 40px;
+  width: 100%;
+}
+
+.signIn>form>input {
+  border: 1px solid #006064;
 }

@@ -1,8 +1,23 @@
-form {
-  background: #FFFABA;
-  border: 2px solid #FFAB05;
+.signUp {
+  align-items: center;
+  background-image: url('../../assets/background.pkm-1.jpg');
+  background-repeat: no-repeat;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
 }
 
-input {
-  border: 1px solid #FFAB05;
+.signUp>form {
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-radius: 5%;
+}
+
+.signUp>form>img {
+  margin: 10px 0 40px;
+  width: 100%;
+}
+
+.signUp>form>input {
+  border: 1px solid #006064;
 }

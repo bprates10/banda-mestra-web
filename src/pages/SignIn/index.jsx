@@ -39,7 +39,7 @@ function SignIn(props) {
   }
 
   return (
-    <div className="container">
+    <div className="signIn">
       <form onSubmit={handleSignIn}>
         <img src={Logo} alt="Banda Mestra logo" />
         {error && <p>{error}</p>}

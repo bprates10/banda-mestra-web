@@ -19,11 +19,11 @@ import Dropzone from "react-dropzone";
 
 //   transition: height 0.2 ease;
 
-  
+
 // `;
 
 export const File = styled(Dropzone)
-`
+  `
   border: 2px dashed #ff3333;
   width: 100%;
   max-width: 660px;
@@ -38,16 +38,14 @@ export const File = styled(Dropzone)
   &.without-files {
     display: flex;
   }
-  img {
-    width: 100px;
-  }
+  
   p {
     margin-top: 15px;
     border: none !important;
   }
 `;
 
-export const Form = styled.form `
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;

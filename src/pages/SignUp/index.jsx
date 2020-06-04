@@ -4,7 +4,7 @@ import api from "../../services/api";
 
 import Logo from "../../assets/banner-web.png"
 import "./styles.css"
-import "../../styles/global.css"
+// import "../../styles/global.css"
 
 // import Button from '@material-ui/core/Button'
 // import CloudUploadIcon from '@material-ui/icons/CloudUpload'
@@ -47,7 +47,7 @@ function SignUp() {
   }
 
   return (
-    <div className="container">
+    <div className="signUp">
       <form onSubmit={handleSignUp}>
         <img src={Logo} alt="Banda Mestra logo" />
         {error && <p>{error}</p>}

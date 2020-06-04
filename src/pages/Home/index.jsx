@@ -4,10 +4,10 @@ import api from '../../services/api'
 // import Map from '../Maps/index'
 
 // include css
-import '../../styles/global.css'
-import '../../styles/navbar.css'
-import '../../styles/body.css'
-import '../../styles/main.css'
+// import '../;../styles/global.css'
+// import '../../styles/navbar.css'
+// import '../../styles/body.css'
+// import '../../styles/main.css'
 import './styles.css'
 import 'rodal/lib/rodal.css';
 
@@ -78,12 +78,13 @@ function App(props) {
 
   return (
 
-    <div id="main">
-      <div className="navbar">
+    <div className="home">
 
-        <img src={listPlayers.avatar_url} alt="Imagem de Perfil" />
+      <div className="navbar-home">
 
-        <div className="form-data">
+        <img className="navbar-photo-profile" src={listPlayers.avatar_url} alt="Imagem de Perfil" />
+
+        <div className="navbar-form">
           <p>{listPlayers.username}</p>
           <br />
           <label>Nome:</label>
@@ -97,62 +98,59 @@ function App(props) {
         </div>
       </div>
 
-      <div className="two-columns">
+      <div className="body-home">
 
-        <div className="my-stats">
-          <p>Minhas Estatísticas</p>
-          <br />
-          <div className="container-main">
+        {/* <div className="column-50-100-left"> */}
+        <p>Minhas Estatísticas</p>
+        <br />
+        <div className="home-body-content">
 
-            <div className="graph">
-              {/* <Skills stats={listPlayers.skills} /> */}
-            </div>
+          <div className="home-card">
+            <p>GRAFICO</p>
+            {/* <Skills stats={listPlayers.skills} /> */}
+          </div>
 
-            <div className="descriptions">
-              <p>Avaliação Média (rating): 3 </p>
-              <p>Melhor Evento Participado: - </p>
-              <p>Último Evento Participado: - </p>
-              <p>Total de Eventos Participados: 0 </p>
-              <p>Total de Eventos Finalizados: 0 </p>
-              {/* <button type="button" className="btn btn-map" onClick={show}>Meu Mapa</button> */}
-              {/* <ModalMap className={dropdown} /> */}
-              {/* <button onClick={some} onClose={some}>show</button> */}
+          <div className="home-descriptions">
+            <p>Avaliação Média (rating): 3 </p>
+            <p>Melhor Evento Participado: - </p>
+            <p>Último Evento Participado: - </p>
+            <p>Total de Eventos Participados: 0 </p>
+            <p>Total de Eventos Finalizados: 0 </p>
+            {/* <button type="button" className="btn btn-map" onClick={show}>Meu Mapa</button> */}
+            {/* <ModalMap className={dropdown} /> */}
+            {/* <button onClick={some} onClose={some}>show</button> */}
 
-              {/* <Rodal visible={visible} onClose={hide} animation={'flip'} width={1000} height={800}>
+            {/* <Rodal visible={visible} onClose={hide} animation={'flip'} width={1000} height={800}>
                 <Map />
               </Rodal> */}
-            </div>
-          </div>
-
-        </div>
-
-        <div className="my-events">
-          <p>Meus Eventos</p>
-          <br />
-
-          <div className="container-main">
-
-            <div className="graph" hidden={isHidden}>
-              {/* <Events /> */}
-            </div>
-
-            <div className="descriptions">
-              <p>Avaliação Média (rating) de Eventos: 0 </p>
-              <p>Melhor Evento Criado: N/A</p>
-              <p>Último Evento Criado: N/A</p>
-              <p>Total de Eventos Criados: 0</p>
-              <p>Total de Eventos Finalizados: 0</p>
-              {/* <button type="button" className="btn btn-add-event" onClick={showDropdown}>Criar Evento</button> */}
-              {/* <ModalCreateEvent className={dropdown} name={listPlayers.name} /> */}
-              {/* <button type="button" className="btn btn-search-event" onClick={showDropdown}>Procurar Evento</button> */}
-              {/* <ModalFindEvent className={dropdown} name={listPlayers.name} /> */}
-            </div>
           </div>
         </div>
 
+        <br />
+        <p>Meus Eventos</p>
+        <br />
+        <div className="home-body-content">
+
+          <div className="home-card">
+            <p>GRAFICO</p>
+            {/* <Events /> */}
+          </div>
+
+          <div className="home-descriptions">
+            <p>Avaliação Média (rating) de Eventos: 0 </p>
+            <p>Melhor Evento Criado: N/A</p>
+            <p>Último Evento Criado: N/A</p>
+            <p>Total de Eventos Criados: 0</p>
+            <p>Total de Eventos Finalizados: 0</p>
+            {/* <button type="button" className="btn btn-add-event" onClick={showDropdown}>Criar Evento</button> */}
+            {/* <ModalCreateEvent className={dropdown} name={listPlayers.name} /> */}
+            {/* <button type="button" className="btn btn-search-event" onClick={showDropdown}>Procurar Evento</button> */}
+            {/* <ModalFindEvent className={dropdown} name={listPlayers.name} /> */}
+          </div>
+        </div>
       </div>
 
-      <div className="icon-navbar-left">
+      <div className="navbar-home-left">
         <div title="Mapa" style={{ color: 'red' }} onClick={() => props.history.push('/maps')}><Explore /></div>
         {/* <div title="Perfil" style={{ color: 'orange' }} onClick={() => props.history.push('/profile')}><Person /></div> */}
         <div title="Eventos" style={{ color: 'green' }} onClick={() => props.history.push('/events')}><SportsEsports /></div>

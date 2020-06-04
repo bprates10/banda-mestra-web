@@ -7,11 +7,17 @@
 
 body, html {
   background: #C8E6C9;
-  font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+  font-family: Roboto, sans-serif;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
   height: 100%;
   width: 100%;
+}
+
+p {
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  text-align: center
 }
 
 /* CONTAINER LOGIN */
@@ -34,8 +40,8 @@ form {
 }
 
 form>img {
-  width: 100%;
-  margin: 10px 0 40px;
+  /* width: 100%; */
+  /* margin: 10px 0 40px; */
 }
 
 form>p {
