@@ -49,9 +49,29 @@
   width: 20%;
 }
 
+/* atributos de espaçamento dos labels do form */
+.navbar-form>.label-rating {
+  margin-left: 7%;
+}
+
 .navbar-form>input {
   margin-bottom: 5%;
   padding-left: 3%;
+}
+
+/* right navbar attrs */
+.navbar-home-left {
+  align-items: center;
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+  justify-content: space-between;
+  margin-left: 1%;
+  padding: 1%;
+  width: 5%;
 }
 
 /* BODY */
@@ -70,7 +90,7 @@
 .home-body-content {
   display: flex;
   flex-direction: row;
-  max-height: 240px;
+  /* max-height: 240px; */
 }
 
 .home-descriptions {
@@ -79,12 +99,24 @@
   border-bottom-right-radius: 3%;
   border-top-right-radius: 3%;
   padding: 2%;
+}
+
+.content-half {
   width: 50%;
+}
+
+.content-full {
+  /* border-radius: 1%; */
+  border-bottom-right-radius: 3%;
+  border-bottom-left-radius: 3%;
+  width: 100%;
 }
 
 .home-descriptions>p {
   font-weight: bold;
+  font-size: 16px;
   margin-top: 2%;
+  text-align: start;
 }
 
 .home-card {
@@ -95,40 +127,24 @@
   width: 50%;
 }
 
-.navbar-home-left {
-  align-items: center;
-  background-color: #C8E6C9;
-  border: 2px solid #006064;
-  border-radius: 3%;
-  display: flex;
-  flex-direction: column;
-  height: 85%;
-  justify-content: space-between;
-  margin-left: 1%;
-  padding: 1%;
-  width: 5%;
-}
 
 
 
-/* atributos de espaçamento dos labels do form */
-.label-rating {
-  margin-left: 7%;
-}
+
 
 /* atributos de espaçamento dos inputs do form */
 
 
 
 
-.my-stats>p {
+/* .my-stats>p {
   font-family: cursive;
   font-size: 24px;
   text-align: center
-}
+} */
 
 /* atributos gerais de botao */
-.btn {
+/* .btn {
   border: none;
   border-bottom-left-radius: 8%;
   border-top-left-radius: 8%;
@@ -138,28 +154,28 @@
   margin-left: 10%;
   margin-top: 3%;
   width: 150px;
-}
+} */
 
 /* botao criar evento */
-.btn-add-event {
+/* .btn-add-event {
   background-color: #006064;
-}
+} */
 
 /* botao procurar evento */
-.btn-search-event {
+/* .btn-search-event {
   background-color: #006064;
-}
+} */
 
 /* botao mapa */
-.btn-map {
+/* .btn-map {
   background-color: rgb(253, 113, 57);
   margin-left: 30%;
-}
+} */
 
-.btn:hover {
+/* .btn:hover {
   background-color: rgb(99, 255, 68);
   color: white;
-}
+} */
 
 /* atributos dos charts */
 .recharts-surface {

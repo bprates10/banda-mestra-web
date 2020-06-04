@@ -110,8 +110,8 @@ function App(props) {
             {/* <Skills stats={listPlayers.skills} /> */}
           </div>
 
-          <div className="home-descriptions">
-            <p>Avaliação Média (rating): 3 </p>
+          <div className="home-descriptions content-half">
+            <p>Avaliação Média (rating): </p>3
             <p>Melhor Evento Participado: - </p>
             <p>Último Evento Participado: - </p>
             <p>Total de Eventos Participados: 0 </p>
@@ -131,17 +131,17 @@ function App(props) {
         <br />
         <div className="home-body-content">
 
-          <div className="home-card">
-            <p>GRAFICO</p>
+          {/* <div className="home-card"> */}
+            {/* <p>GRAFICO</p> */}
             {/* <Events /> */}
-          </div>
+          {/* </div> */}
 
-          <div className="home-descriptions">
+          <div className="home-descriptions content-full">
             <p>Avaliação Média (rating) de Eventos: 0 </p>
-            <p>Melhor Evento Criado: N/A</p>
-            <p>Último Evento Criado: N/A</p>
+            {/* <p>Melhor Evento Criado: N/A</p> */}
+            <p>Último Evento Criado: N/A</p> 
             <p>Total de Eventos Criados: 0</p>
-            <p>Total de Eventos Finalizados: 0</p>
+            <p>Total de Eventos Finalizados: 0</p> 
             {/* <button type="button" className="btn btn-add-event" onClick={showDropdown}>Criar Evento</button> */}
             {/* <ModalCreateEvent className={dropdown} name={listPlayers.name} /> */}
             {/* <button type="button" className="btn btn-search-event" onClick={showDropdown}>Procurar Evento</button> */}

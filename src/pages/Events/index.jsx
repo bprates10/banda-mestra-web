@@ -3,6 +3,7 @@ import api from '../../services/api'
 
 import TextField from '@material-ui/core/TextField';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -21,14 +22,31 @@ import './styles.css'
 
 function Events(props) {
 
-  const [listEvents, setListEvents] = useState([])
-  const [visible, setVisible] = useState(false)
+  // const [listEvents, setListEvents] = useState([])
+  // const [visible, setVisible] = useState(false)
+  const [title, setTitle] = useState('')
+  const [numPlayers, setNumPlayers] = useState(1)
+
+  // const [value, setValue] = React.useState(null);
+
+  const gameType = [
+    { title: 'Sólo', gameType: '1'},
+    { title: 'Player x Player (PvP) - 1 contra 1', gameType: '2'},
+    { title: 'Todos x Todos (AvA) - Ninguém é de ninguém', gameType: '3'},
+    { title: 'Equipe(e) x Equipe(s) (TvT) - ', gameType: '4'},
+  ]
+
+  const gameTypeProps = {
+    options: gameType,
+    getOptionLabel: (option) => option.title,
+  };
+
 
   async function getEvents() {
 
     // avatar_url: 'https://img.ibxk.com.br/ns/quizpop/2015/03/10/10175754730000.png'
 
-    setListEvents([])
+    // setListEvents([])
 
     try {
       const res = await api.get('/events')
@@ -36,21 +54,22 @@ function Events(props) {
       console.log("retorno events => ", res.data[0])
 
       if (res.data) {
-        setListEvents(res.data[0])
+        // setListEvents(res.data[0])
       }
     }
     catch (error) {
-      setListEvents({
-        event_avatar_url: 'https://img.ibxk.com.br/ns/quizpop/2015/03/10/10175754730000.png'
-      })
+      // setListEvents({
+      //   event_avatar_url: 'https://img.ibxk.com.br/ns/quizpop/2015/03/10/10175754730000.png'
+      // })
       console.log("error =>", error)
     }
 
   }
 
   useEffect(() => {
-    getEvents()
-  }, [])
+    // getEvents()
+    console.log("title => ", title)
+  }, [title])
 
   const marks = [
     {
@@ -103,6 +122,8 @@ function Events(props) {
     return marks.findIndex((mark) => mark.value === value) + 1;
   }
 
+  
+
   return (
 
     <div id="events">
@@ -113,63 +134,111 @@ function Events(props) {
 
           <p style={{ color: '#fff' }}>Criar Evento</p>
           <br />
+
           <div className="events-create">
 
-            <div className="events-descriptions">
-              <p>Nome do Evento:</p>
-              <TextField id="outlined-basic" label="Nome do Evento" variant="outlined" style={{ width: '60%' }} />
-              <br />
-              <p>Descrição do Evento:</p>
-              {/* <textarea style={{ border: '1px dashed palegreen' }} /> */}
-              <TextareaAutosize
-                rowsMax={4}
-                aria-label="maximum height"
-                placeholder="Escreva aqui uma descrição para o evento :)"
-                style={{ backgroundColor: 'transparent', height: 100, width: '60%' }}
-              />
-              <br />
-              <p>Observações do Evento:</p>
-              {/* <textarea style={{ border: '1px dashed palegreen' }} /> */}
-              <TextareaAutosize
-                rowsMax={4}
-                aria-label="maximum height"
-                placeholder="Escreva aqui as observações (por exemplo, levar um refri ou salgadinho é legal :)"
-                style={{ backgroundColor: 'transparent', height: 100, width: '60%' }}
-              />
-              <br />
-              <br />
+            {/* card 1 */}
+            <div className="events-descriptions">              
+
+              {/* event title */}                
+              <div className="events-form-separator">
+                <TextField 
+                  required 
+                  id="standard-required" 
+                  label="Título" 
+                  placeholder="Título do Evento" 
+                  fullWidth
+                  value={title}
+                  onChange={(e) => {setTitle(e.target.value)}}
+                />
+
+              </div>
+
+              {/* event description */}
+              <div className="events-form-separator">
+                
+                <p>Descrição do Evento:</p>
+                {/* <textarea style={{ border: '1px dashed palegreen' }} /> */}
+                <TextareaAutosize
+                  rowsMin={4}
+                  rowsMax={4}
+                  // aria-label="maximum height"
+                  placeholder="Escreva aqui uma descrição para o evento :)"
+                  style={{ backgroundColor: 'transparent', width: '80%' }}
+                />
+
+              </div>
+
+              {/* event observation */}
+              <div className="events-form-separator">
+
+                <p>Observações do Evento:</p>
+                {/* <textarea style={{ border: '1px dashed palegreen' }} /> */}
+                <TextareaAutosize
+                  rowsMin={4}
+                  rowsMax={4}
+                  // aria-label="maximum height"
+                  placeholder="Escreva aqui as observações (por exemplo, levar um refri ou salgadinho é legal :)"
+                  style={{ backgroundColor: 'transparent', width: '80%' }}
+                />
+
+              </div>
+
             </div>
 
+            {/* card 2 */}
             <div className="events-descriptions">
-              <p>Tabuleiro Selecionado:</p>
-              <select>
-                <option>1</option>
-                <option>1</option>
-                <option>1</option>
-                <option>1</option>
-              </select>
 
-              <Typography id="discrete-slider-restrict" gutterBottom>
-                Número de Jogadores:
-              </Typography>
-              <Slider
-                defaultValue={20}
-                valueLabelFormat={valueLabelFormat}
-                getAriaValueText={valuetext}
-                aria-labelledby="discrete-slider-restrict"
-                step={null}
-                valueLabelDisplay="auto"
-                marks={marks}
-              />
+              <div className="events-form-separator">
 
-              <FormControlLabel
-                control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
-                label="Restrição"
-              />
+                <Autocomplete
+                  {...gameTypeProps}
+                  id="clear-on-escape"
+                  clearOnEscape
+                  renderInput={(params) => <TextField {...params} label="Modo de Jogo" margin="normal" />}
+                  onChange={[]}
+                />
 
-              <p>Endereço:</p>
-              <input type="text" placeholder="Longitude" />
-              <input type="text" placeholder="latitude" />
+              </div>
+
+              <div className="events-form-separator">
+
+                <Typography id="discrete-slider-restrict" gutterBottom>
+                  Número de Jogadores:
+                </Typography>
+
+                <Slider
+                  defaultValue={20}
+                  valueLabelFormat={valueLabelFormat}
+                  getAriaValueText={valuetext}
+                  aria-labelledby="discrete-slider-restrict"
+                  step={null}
+                  valueLabelDisplay="auto"
+                  marks={marks}
+                />
+
+              </div>
+
+              <div className="events-form-separator">
+
+                <FormControlLabel
+                  control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
+                  label="Restrição"
+                />
+
+              </div>
+
+              <div className="events-form-separator">
+
+                <p>Endereço:</p>
+                <input type="text" placeholder="Longitude" />
+                <input type="text" placeholder="latitude" />
+
+              </div>
+
+              
+
+              
 
             </div>
 

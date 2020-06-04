@@ -1,7 +1,8 @@
 .signUp {
   align-items: center;
-  background-image: url('../../assets/background.pkm-1.jpg');
+  background-image: url('../../assets/background.pkm-11.jpg');
   background-repeat: no-repeat;
+  /* background-size: cover; */
   display: flex;
   height: 100vh;
   justify-content: center;
