@@ -27,7 +27,8 @@ class AddEvent extends Component {
     description: "",
     playersnum: "",
     error: "",
-    files: []
+    files: [],
+    game: ''
   };
   //   Valida se foram enviadas na URL a latitude e longitude, se não redireciona pra /app
   componentDidMount() {
@@ -129,6 +130,11 @@ class AddEvent extends Component {
           type="decimal"
           placeholder="Número de Jogadores"
           onChange={e => this.setState({ playersnum: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Título Selecionado"
+          onChange={e => this.setState({ game: e.target.value })}
         />
         {/* <File
         multiple
