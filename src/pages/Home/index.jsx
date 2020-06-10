@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api'
+
+import { logout } from "../../services/auth";
+
+import TextField from '@material-ui/core/TextField';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 // import Rodal from 'rodal';
 // import Map from '../Maps/index'
 
@@ -21,8 +26,9 @@ import 'rodal/lib/rodal.css';
 
 // include icons
 // import { Person, Explore, SportsEsports } from '@material-ui/icons';
-// import PlusOneIcon from '@material-ui/icons/PlusOne';
+import PlusOneIcon from '@material-ui/icons/PlusOne';
 import { Explore, SportsEsports } from '@material-ui/icons';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function App(props) {
 
@@ -30,6 +36,10 @@ function App(props) {
   const isDisabled = true
   const isHidden = false
   const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    getPlayer()
+  }, [])
 
   useEffect(() => {
     console.log("listPlayers => ", listPlayers)
@@ -40,11 +50,12 @@ function App(props) {
     setListPlayers([])
 
     try {
-      const res = await api.get('/users')
+      const res = await api.get('/users/' + sessionStorage.getItem('MAIL'))
 
       console.log("retorno users => ", res.data[0])
 
       if (res.data) {
+
         setListPlayers(res.data[0])
       }
     }
@@ -64,6 +75,11 @@ function App(props) {
 
   }
 
+  const handleLogout = e => {
+    logout();
+    props.history.push("/");
+  };
+
   const show = () => {
     setVisible(true)
   }
@@ -72,9 +88,9 @@ function App(props) {
     setVisible(false)
   }
 
-  useEffect(() => {
-    getPlayer()
-  }, [])
+  const generic = () => {
+    return
+  }
 
   return (
 
@@ -82,20 +98,55 @@ function App(props) {
 
       <div className="navbar-home">
 
-        <img className="navbar-photo-profile" src={listPlayers.avatar_url} alt="Imagem de Perfil" />
+        <img className="navbar-photo-profile" src={listPlayers.avatar_url ? listPlayers.avatar_url : ''} alt="Imagem de Perfil" />
+
+        {/* <p>{listPlayers.username}</p> */}
+        {/* <br /> */}
 
         <div className="navbar-form">
-          <p>{listPlayers.username}</p>
-          <br />
-          <label>Nome:</label>
-          <input type="text" disabled={{ isDisabled }} value={listPlayers.name} />
-          <label>Level:</label>
-          <input type="text" className="input-small" value={99} disabled={{ isDisabled }} />
-          <label className="label-rating">Rating:</label>
-          <input type="text" className="input-small" value={99} disabled={{ isDisabled }} />
-          <label>Biografia:</label>
-          <textarea type="text" value={listPlayers.biography} style={{ height: 100, padding: '3%' }} disabled={{ isDisabled }} />
+          <div className="events-form-separator">
+            <TextField
+              disabled
+              value={listPlayers.name}
+              fullWidth
+              style={{ color: '#fff' }}
+            />
+
+            <TextField
+              disabled
+              value={listPlayers.username}
+              style={{ color: '#fff', fontFamily: 'bold' }}
+            />
+
+            <TextField
+              label="Level"
+              disabled
+              value={99}
+              size='small'
+              style={{ color: '#fff' }}
+            />
+
+            <TextField
+              id="standard-required"
+              label="Rating"
+              disabled
+              value={99}
+              color={'primary'}
+            />
+
+            <p>Bio:</p>
+            <TextareaAutosize
+              disabled
+              rowsMin={3}
+              rowsMax={3}
+              defaultValue={listPlayers.biography}
+              style={{ backgroundColor: 'transparent', color: '#fff' }}
+            />
+          </div>
         </div>
+
+
+
       </div>
 
       <div className="body-home">
@@ -132,16 +183,16 @@ function App(props) {
         <div className="home-body-content">
 
           {/* <div className="home-card"> */}
-            {/* <p>GRAFICO</p> */}
-            {/* <Events /> */}
+          {/* <p>GRAFICO</p> */}
+          {/* <Events /> */}
           {/* </div> */}
 
           <div className="home-descriptions content-full">
             <p>Avaliação Média (rating) de Eventos: 0 </p>
             {/* <p>Melhor Evento Criado: N/A</p> */}
-            <p>Último Evento Criado: N/A</p> 
+            <p>Último Evento Criado: N/A</p>
             <p>Total de Eventos Criados: 0</p>
-            <p>Total de Eventos Finalizados: 0</p> 
+            <p>Total de Eventos Finalizados: 0</p>
             {/* <button type="button" className="btn btn-add-event" onClick={showDropdown}>Criar Evento</button> */}
             {/* <ModalCreateEvent className={dropdown} name={listPlayers.name} /> */}
             {/* <button type="button" className="btn btn-search-event" onClick={showDropdown}>Procurar Evento</button> */}
@@ -152,9 +203,9 @@ function App(props) {
 
       <div className="navbar-home-left">
         <div title="Mapa" style={{ color: 'red' }} onClick={() => props.history.push('/maps')}><Explore /></div>
-        {/* <div title="Perfil" style={{ color: 'orange' }} onClick={() => props.history.push('/profile')}><Person /></div> */}
         <div title="Eventos" style={{ color: 'green' }} onClick={() => props.history.push('/events')}><SportsEsports /></div>
-        {/* <div title="Adicionar Evento" style={{ color: 'green' }} onClick={[]}><PlusOneIcon /></div> */}
+        <div title="Games" style={{ color: 'orange' }} onClick={generic}><PlusOneIcon /></div>
+        <div title="Perfil" style={{ color: 'orange' }} onClick={handleLogout}><ExitToAppIcon /></div>
       </div>
     </div >
   );

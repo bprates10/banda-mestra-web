@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
-import { logout } from "../../services/auth";
+
 import Dimensions from "react-dimensions";
 import MapGL from "react-map-gl";
 import PropTypes from "prop-types";

@@ -10,7 +10,7 @@ import "./styles.css"
 // import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 // import SaveIcon from '@material-ui/icons/Save'
 
-function SignUp() {
+function SignUp(props) {
 
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -39,7 +39,7 @@ function SignUp() {
 
     try {
       await api.post("/users", { username, email, password });
-      this.props.history.push("/");
+      props.history.push("/");
     } catch (err) {
       console.log(err);
       setError("Usuário já cadastrado!")

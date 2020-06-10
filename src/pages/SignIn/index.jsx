@@ -28,9 +28,12 @@ function SignIn(props) {
 
     else {
       try {
-        // const response = await api.post("/sessions", { email, password });
-        // login(response.data.token);
+        const response = await api.post("/sessions", { email, password });
+
+        login(response.data.token, response.data.email)
+
         props.history.push("/home");
+
       } catch (err) {
         console.log(err)
         setError("Houve um problema com o login, verifique suas credenciais.")
