@@ -1,0 +1,51 @@
+.games {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.games-content {
+  background-image: url("../../assets/background.pkm-9.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid #006064;
+  border-radius: 1%;
+  width: 100%;
+  height: 100%;
+}
+
+.games-create {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.games-descriptions {
+  background-color: #C8E6C9;
+  border: 2px solid #006064;
+  border-radius: 2%;
+  position: relative;
+  /* height: 100%; */
+  margin: 1%;
+  padding: 1%;
+  width: 45%;
+}
+
+/* games form attrs */
+.games-descriptions>p {
+  font-weight: bold;
+  margin-top: 2%;
+}
+
+.games-form-separator {
+  padding: 3%;
+}
+
+.games-form-separator>p {
+  margin-bottom: 3%;
+}
+
+.games-form-separator>textarea {
+  width: 100% !important;
+}
+

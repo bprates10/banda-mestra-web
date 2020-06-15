@@ -1,0 +1,17 @@
+.Pin {
+  border: .5px solid #C8E6C9;
+  border-radius: 5px;
+  height: 62px;
+  width: 62px;
+} 
+
+.Pin>a {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.event-title {
+  color: #fff;
+  margin-left: -30%;
+}

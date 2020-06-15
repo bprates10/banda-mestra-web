@@ -5,8 +5,6 @@ import TextField from '@material-ui/core/TextField';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -40,31 +38,6 @@ function Events(props) {
     options: gameType,
     getOptionLabel: (options) => options.title
   };
-
-
-  async function getEvents() {
-
-    // avatar_url: 'https://img.ibxk.com.br/ns/quizpop/2015/03/10/10175754730000.png'
-
-    // setListEvents([])
-
-    try {
-      const res = await api.get('/events')
-
-      console.log("retorno events => ", res.data[0])
-
-      if (res.data) {
-        // setListEvents(res.data[0])
-      }
-    }
-    catch (error) {
-      // setListEvents({
-      //   event_avatar_url: 'https://img.ibxk.com.br/ns/quizpop/2015/03/10/10175754730000.png'
-      // })
-      console.log("error =>", error)
-    }
-
-  }
 
   async function genericFunction() {
     console.log('todo...')

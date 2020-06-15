@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import querySearch from "stringquery";
-import classNames from "classnames";
 import PropTypes from "prop-types";
-
-// import { Form, File } from "./styles";
-
-import { Form, DropContainer } from './styles'
 
 import api from "../../services/api";
 
-import Dropzone from 'react-dropzone'
+import classNames from "classnames";
+// import { Form, File } from "./styles";
+import './styles.css'
 
 class AddEvent extends Component {
   static propTypes = {
@@ -28,8 +25,10 @@ class AddEvent extends Component {
     playersnum: "",
     error: "",
     files: [],
-    game: ''
+    game: '',
+    isRestrict: false
   };
+
   //   Valida se foram enviadas na URL a latitude e longitude, se não redireciona pra /app
   componentDidMount() {
     const params = querySearch(this.props.location.search);
@@ -38,7 +37,7 @@ class AddEvent extends Component {
       !params.hasOwnProperty("longitude")
     ) {
       alert("É necessário definir a latitude e longitude para um imóvel.");
-      this.props.history.push("/app");
+      this.props.history.push("/maps");
     }
 
     this.setState({ ...params });
@@ -51,10 +50,10 @@ class AddEvent extends Component {
   renderFiles() {
     const { files } = this.state;
 
-    return files.length == 0 ? (
+    return files.length === 0 ? (
       <p>Jogue as imagens ou clique aqui para adiciona-las</p>
     ) : (
-        files.map(file => <img key={file.name} src={file.preview} />)
+        files.map(file => <img key={file.name} src={file.preview} alt="description" />)
       );
   }
 
@@ -68,20 +67,21 @@ class AddEvent extends Component {
         this.setState({ error: "Preencha todos os campos" });
         return;
       }
-      // É importante notar que o já foi extraído o id, através da desestruturação, da resposta da requisição da API para criar o imóvel.
+      // É importante notar que o já foi extraído o id, através da desestruturação,
+      // da resposta da requisição da API para criar o imóvel.
       const {
         data: { id }
       } = await api.post("/events", {
         title,
         description,
         playersnum,
-        // isRestrict,
+        //isRestrict,
         latitude,
         longitude
       });
 
       // Verifica se existe file adicionado ao state
-      if (!files.length) this.props.history.push("/app");
+      // if (!files.length) this.props.history.push("/maps");
 
       // Estruturação de formulário form
       const data = new FormData();
@@ -98,12 +98,12 @@ class AddEvent extends Component {
 
       await api.post(`/events/${id}/images`, data, config);
 
-      this.props.history.push("/app");
+      this.props.history.push("/maps");
     } catch (err) {
       this.setState({ error: "Ocorreu algum erro ao adicionar o imóvel" });
     }
   };
-  // Esse metodo direciona o usuario para /app
+  // Esse metodo direciona o usuario para /maps
   handleCancel = e => {
     e.preventDefault();
 
@@ -112,7 +112,7 @@ class AddEvent extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <div className="Form" onSubmit={this.handleSubmit}>
         <h1>Novo Evento</h1>
         <hr />
         {this.state.error && <p>{this.state.error}</p>}
@@ -137,19 +137,19 @@ class AddEvent extends Component {
           onChange={e => this.setState({ game: e.target.value })}
         />
         {/* <File
-        multiple
-        onDrop={this.handleDrop}
-        className={classNames({ "without-files": !this.state.files.length })}
-        >*/}
-          {this.renderFiles()}
-        {/*</File> */}
+          multiple
+          onDrop={this.handleDrop}
+          className={classNames({ "without-files": !this.state.files.length })}
+        > */}
+        {this.renderFiles()}
+        {/* </File> */}
         <div className="actions">
           <button type="submit">Adicionar</button>
           <button onClick={this.handleCancel} className="cancel">
             Cancelar
           </button>
         </div>
-      </Form>
+      </div>
     );
   }
 }

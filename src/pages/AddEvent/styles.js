@@ -9,18 +9,18 @@ import Dropzone from "react-dropzone";
 //   border-color: #e57878;
 // `;
 
-// export const DropContainer = styled.div.attrs({
-//   className: "dropzone"
-// })
-// `
-//   border: 1px dashed #ddd;
-//   border-radius: 4px;
-//   cursor: pointer;
+export const DropContainer = styled.div.attrs({
+  className: "dropzone"
+})
+  `
+  border: 1px dashed #ddd;
+  border-radius: 4px;
+  cursor: pointer;
 
-//   transition: height 0.2 ease;
+  transition: height 0.2 ease;
 
 
-// `;
+`;
 
 export const File = styled(Dropzone)
   `

@@ -4,19 +4,21 @@ import { withRouter } from "react-router-dom";
 import Dimensions from "react-dimensions";
 import MapGL from "react-map-gl";
 import PropTypes from "prop-types";
-import { ModalRoute } from "react-router-modal";
 
-import Button from "../../components/Button";
-import { Container, ButtonContainer, PointReference } from "./styles";
+// import Button from "../../components/Button";
+// import { Container, ButtonContainer, PointReference } from "./styles";
+import './styles.css'
 
 import debounce from "lodash/debounce";
 import api from "../../services/api";
 
-import Events from "../../components/Events";
-import AddEvent from "../AddEvent";
+import { ModalRoute } from "react-router-modal";
+import AddEvents from "../AddEvent/index.jsx"
+import Events from "../../components/Events/index.jsx";
 
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import EditLocationIcon from '@material-ui/icons/EditLocation';
 
 const TOKEN =
   "pk.eyJ1IjoiYnByYXRlczEwIiwiYSI6ImNrYW9tZWtvMDA0eWcycHF5Mmw2eGFvaWwifQ.HSBDN-VZnZbrfx1YpljnCg";
@@ -49,7 +51,9 @@ class Map extends Component {
   };
 
   handleAddEvent = () => {
+
     const { match, history } = this.props;
+    console.log('match => ', match)
     const { latitude, longitude } = this.state.viewport;
     history.push(
       `${match.url}/events/add?latitude=${latitude}&longitude=${longitude}`
@@ -72,40 +76,43 @@ class Map extends Component {
       const response = await api.get("/events", {
         params: { latitude, longitude }
       });
+      console.log("response => ", response.data)
       this.setState({ events: response.data });
     } catch (err) {
       console.log(err);
     }
   };
 
-  handleLogout = e => {
-    // logout();
+  handleLogout = () => {
     this.props.history.push("/home");
   };
 
   renderActions() {
     return (
-      <ButtonContainer>
-        <Button
-          color="#fc6963"
+      <div className="ButtonContainer">
+
+        <div className="Button"
+          // color="#fc6963"
           onClick={() => this.setState({ addActivate: true })}
         >
           <i className="fa fa-plus" />
           <AddLocationIcon />
-        </Button>
-        <Button color="#222" onClick={this.handleLogout}>
+        </div>
+
+        <div className="Button" color="#222" onClick={this.handleLogout}>
           <i className="fa fa-times" />
           <ExitToAppIcon />
-        </Button>
-      </ButtonContainer>
+        </div>
+
+      </div>
     );
   }
 
   renderButtonAdd() {
     return (
       this.state.addActivate && (
-        <PointReference>
-          <i className="fa fa-map-marker" />
+        <div className="PointReference">
+          <EditLocationIcon />
           <div>
             <button onClick={this.handleAddEvent} type="button">
               Adicionar
@@ -117,14 +124,16 @@ class Map extends Component {
               Cancelar
             </button>
           </div>
-        </PointReference>
+        </div>
       )
     );
   }
 
   render() {
+
     const { containerWidth: width, containerHeight: height, match } = this.props;
     const { events, addActivate } = this.state;
+    console.log('addActivate => ', addActivate)
     return (
       <Fragment>
         <MapGL
@@ -136,16 +145,19 @@ class Map extends Component {
           onViewportChange={viewport => this.setState({ viewport })}
           onViewStateChange={this.updateEventsLocalization.bind(this)}
         >
-          <Events events={events} />
+
+          {!addActivate && <Events events={events} />}
+
         </MapGL>
-        {/* {!addActivate && <Events match={match} events={events} />} */}
+
         {this.renderActions()}
         {this.renderButtonAdd()}
-        {/* <ModalRoute
+
+        <ModalRoute
           path={`${match.url}/events/add`}
           parentPath={match.url}
-          component={AddEvent}
-        /> */}
+          component={AddEvents}
+        />
       </Fragment>
     );
   }
@@ -153,9 +165,9 @@ class Map extends Component {
 
 const DimensionedMap = withRouter(Dimensions()(Map));
 const App = () => (
-  <Container>
+  <div className="Container">
     <DimensionedMap />
-  </Container>
+  </div>
 );
 
 export default App;

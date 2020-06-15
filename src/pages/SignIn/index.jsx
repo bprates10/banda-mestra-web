@@ -29,7 +29,8 @@ function SignIn(props) {
     else {
       try {
         const response = await api.post("/sessions", { email, password });
-
+        // console.log('response login token => ', response.data.token)
+        // console.log('response login email => ', response.data.email)
         login(response.data.token, response.data.email)
 
         props.history.push("/home");

@@ -1,62 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api'
-
 import { logout } from "../../services/auth";
 
 import TextField from '@material-ui/core/TextField';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-// import Rodal from 'rodal';
-// import Map from '../Maps/index'
 
-// include css
-// import '../;../styles/global.css'
-// import '../../styles/navbar.css'
-// import '../../styles/body.css'
-// import '../../styles/main.css'
 import './styles.css'
 import 'rodal/lib/rodal.css';
 
-// include charts
-// import Skills from "../../components/SkillChart"
-// import Events from "../../components/EventChart"
-
-// importando modais
-// import ModalCreateEvent from '../../components/ModalCreateEvent.jsx';
-// import ModalFindEvent from '../../components/ModalFindEvent.jsx';
-
-// include icons
-// import { Person, Explore, SportsEsports } from '@material-ui/icons';
 import PlusOneIcon from '@material-ui/icons/PlusOne';
 import { Explore, SportsEsports } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import FaceIcon from '@material-ui/icons/Face';
+
+import BootstrapTable from 'react-bootstrap-table-next';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 function App(props) {
 
   const [listPlayers, setListPlayers] = useState([])
-  const isDisabled = true
-  const isHidden = false
-  const [visible, setVisible] = useState(false)
+  const [listEvents, setListEvents] = useState([])
 
   useEffect(() => {
+
     getPlayer()
-  }, [])
+    getEvents()
 
-  useEffect(() => {
-    console.log("listPlayers => ", listPlayers)
-  }, [listPlayers])
+    // console.log('local storage mail -> ', localStorage.getItem("@bandamestra-Email"))
+    // console.log('local storage token -> ', localStorage.getItem("@airbnb-Token"))
+  }, [])
 
   async function getPlayer() {
 
     setListPlayers([])
 
     try {
-      const res = await api.get('/users/' + sessionStorage.getItem('MAIL'))
 
-      console.log("retorno users => ", res.data[0])
+      const res = await api.get('/users/' + localStorage.getItem("@bandamestra-Email"))
 
       if (res.data) {
 
         setListPlayers(res.data[0])
+
       }
     }
     catch (error) {
@@ -75,22 +60,49 @@ function App(props) {
 
   }
 
-  const handleLogout = e => {
+  async function getEvents() {
+
+    setListEvents([])
+
+    try {
+      const email = localStorage.getItem('@bandamestra-Email')
+      const res = await api.get('/events', { email, latitude: -29.927630, longitude: -51.043640 })
+
+      console.log("retorno users => ", res.data[0])
+
+      if (res.data) {
+
+        setListEvents(res.data[0])
+      }
+    }
+    catch (error) {
+      console.log("error =>", error)
+    }
+
+  }
+
+  const handleLogout = () => {
     logout();
     props.history.push("/");
-  };
-
-  const show = () => {
-    setVisible(true)
   }
 
-  const hide = () => {
-    setVisible(false)
-  }
 
-  const generic = () => {
-    return
-  }
+  const products = [{
+    title: 'titulo',
+    description: 'descrição',
+    playersnum: 5,
+    type: 'modo combatente',
+    created_at: '01-01-2001',
+    restrict: 'restrito'
+  }]
+  const columns = [
+    { dataField: 'title', text: 'Título' },
+    { dataField: 'description', text: 'Descrição' },
+    { dataField: 'playersnum', text: 'Nro. Jogadores' },
+    { dataField: 'type', text: 'Tipo de Combate' },
+    { dataField: 'created_at', text: 'Criado em:' },
+    { dataField: 'restrict', text: 'Restrito' },
+  ]
 
   return (
 
@@ -99,9 +111,6 @@ function App(props) {
       <div className="navbar-home">
 
         <img className="navbar-photo-profile" src={listPlayers.avatar_url ? listPlayers.avatar_url : ''} alt="Imagem de Perfil" />
-
-        {/* <p>{listPlayers.username}</p> */}
-        {/* <br /> */}
 
         <div className="navbar-form">
           <div className="events-form-separator">
@@ -145,19 +154,33 @@ function App(props) {
           </div>
         </div>
 
-
-
       </div>
 
       <div className="body-home">
+        <br />
+        <p>Meus Eventos</p>
+        <br />
+        <div className="home-body-content">
 
-        {/* <div className="column-50-100-left"> */}
-        <p>Minhas Estatísticas</p>
+          <div className="home-descriptions content-full">
+            <BootstrapTable
+              bordered={true}
+              keyField='id'
+              data={products}
+              columns={columns}
+              fullWidth
+              style={{ border: '1px solid blue' }}
+            // rowStyle={{ backgroundColor: 'red' }} 
+            />
+          </div>
+        </div>
+        <br />
+        <p>Eventos Próximos</p>
         <br />
         <div className="home-body-content">
 
           <div className="home-card">
-            <p>GRAFICO</p>
+            {/* <p>GRAFICO</p> */}
             {/* <Skills stats={listPlayers.skills} /> */}
           </div>
 
@@ -167,45 +190,17 @@ function App(props) {
             <p>Último Evento Participado: - </p>
             <p>Total de Eventos Participados: 0 </p>
             <p>Total de Eventos Finalizados: 0 </p>
-            {/* <button type="button" className="btn btn-map" onClick={show}>Meu Mapa</button> */}
-            {/* <ModalMap className={dropdown} /> */}
-            {/* <button onClick={some} onClose={some}>show</button> */}
-
-            {/* <Rodal visible={visible} onClose={hide} animation={'flip'} width={1000} height={800}>
-                <Map />
-              </Rodal> */}
           </div>
         </div>
 
-        <br />
-        <p>Meus Eventos</p>
-        <br />
-        <div className="home-body-content">
-
-          {/* <div className="home-card"> */}
-          {/* <p>GRAFICO</p> */}
-          {/* <Events /> */}
-          {/* </div> */}
-
-          <div className="home-descriptions content-full">
-            <p>Avaliação Média (rating) de Eventos: 0 </p>
-            {/* <p>Melhor Evento Criado: N/A</p> */}
-            <p>Último Evento Criado: N/A</p>
-            <p>Total de Eventos Criados: 0</p>
-            <p>Total de Eventos Finalizados: 0</p>
-            {/* <button type="button" className="btn btn-add-event" onClick={showDropdown}>Criar Evento</button> */}
-            {/* <ModalCreateEvent className={dropdown} name={listPlayers.name} /> */}
-            {/* <button type="button" className="btn btn-search-event" onClick={showDropdown}>Procurar Evento</button> */}
-            {/* <ModalFindEvent className={dropdown} name={listPlayers.name} /> */}
-          </div>
-        </div>
       </div>
 
       <div className="navbar-home-left">
         <div title="Mapa" style={{ color: 'red' }} onClick={() => props.history.push('/maps')}><Explore /></div>
         <div title="Eventos" style={{ color: 'green' }} onClick={() => props.history.push('/events')}><SportsEsports /></div>
-        <div title="Games" style={{ color: 'orange' }} onClick={generic}><PlusOneIcon /></div>
-        <div title="Perfil" style={{ color: 'orange' }} onClick={handleLogout}><ExitToAppIcon /></div>
+        <div title="Games" style={{ color: 'orange' }} onClick={() => props.history.push('/games')}><PlusOneIcon /></div>
+        <div title="Perfil" style={{ color: 'darkorchid' }} onClick={handleLogout}><FaceIcon /></div>
+        <div title="Logout" style={{ color: 'orange' }} onClick={handleLogout}><ExitToAppIcon /></div>
       </div>
     </div >
   );
