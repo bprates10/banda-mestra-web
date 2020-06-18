@@ -24,7 +24,7 @@ function App(props) {
   useEffect(() => {
 
     getPlayer()
-    getEvents()
+    // getEvents()
 
     // console.log('local storage mail -> ', localStorage.getItem("@bandamestra-Email"))
     // console.log('local storage token -> ', localStorage.getItem("@airbnb-Token"))
@@ -196,11 +196,11 @@ function App(props) {
       </div>
 
       <div className="navbar-home-left">
-        <div title="Mapa" style={{ color: 'red' }} onClick={() => props.history.push('/maps')}><Explore /></div>
-        <div title="Eventos" style={{ color: 'green' }} onClick={() => props.history.push('/events')}><SportsEsports /></div>
-        <div title="Games" style={{ color: 'orange' }} onClick={() => props.history.push('/games')}><PlusOneIcon /></div>
-        <div title="Perfil" style={{ color: 'darkorchid' }} onClick={handleLogout}><FaceIcon /></div>
-        <div title="Logout" style={{ color: 'orange' }} onClick={handleLogout}><ExitToAppIcon /></div>
+        <div className="map" title="Mapa" style={{ color: 'red' }} onClick={() => props.history.push('/maps')}><Explore /></div>
+        <div className="event" title="Eventos" style={{ color: 'green' }} onClick={() => props.history.push('/events')}><SportsEsports /></div>
+        <div className="game" title="Games" style={{ color: 'orange' }} onClick={() => props.history.push('/games')}><PlusOneIcon /></div>
+        <div className="profile" title="Perfil" style={{ color: 'darkorchid' }} onClick={handleLogout}><FaceIcon /></div>
+        <div className="logout" title="Logout" style={{ color: 'orange' }} onClick={handleLogout}><ExitToAppIcon /></div>
       </div>
     </div >
   );

@@ -62,8 +62,9 @@
   text-align: center;
 }
 
-.MuiSvgIcon-root {
+.ButtonContainer>.Button>.MuiSvgIcon-root {
   color: #C8E6C9;
   margin-bottom: 1%;
   font-size: 6.5rem !important;
+  width: 50px;
 }

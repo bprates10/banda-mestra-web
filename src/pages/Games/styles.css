@@ -48,4 +48,8 @@
 .games-form-separator>textarea {
   width: 100% !important;
 }
-
+.games-navbar-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

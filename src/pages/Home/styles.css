@@ -87,6 +87,10 @@
   width: 60%;
 }
 
+.body-home>p {
+  font-size: 30px;
+}
+
 .home-body-content {
   display: flex;
   flex-direction: row;
@@ -127,7 +131,30 @@
   width: 50%;
 }
 
+.map>.MuiSvgIcon-root {
+  color: red;
+  width: 35px;
+}
 
+.event>.MuiSvgIcon-root {
+  color: green;
+  width: 35px;
+}
+
+.game>.MuiSvgIcon-root {
+  color: orange;
+  width: 35px;
+}
+
+.profile>.MuiSvgIcon-root {
+  color: darkorchid;
+  width: 35px;
+}
+
+.logout>.MuiSvgIcon-root {
+  color: orange;
+  width: 35px;
+}
 
 
 

@@ -95,7 +95,7 @@ function Games(props) {
 
       <div className="games-content">
 
-        <p style={{ color: '#fff', paddingTop: '3%', fontSize: 40 }}>Cadastrar Games</p>
+        <p style={{ color: '#006064', paddingTop: '3%', fontSize: 40 }}>Cadastrar Games</p>
         <br />
 
         <div className="games-create">
