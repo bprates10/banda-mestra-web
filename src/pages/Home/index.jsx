@@ -25,9 +25,7 @@ function App(props) {
 
     getPlayer()
     // getEvents()
-
-    // console.log('local storage mail -> ', localStorage.getItem("@bandamestra-Email"))
-    // console.log('local storage token -> ', localStorage.getItem("@airbnb-Token"))
+    
   }, [])
 
   async function getPlayer() {

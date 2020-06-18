@@ -30,10 +30,10 @@ const Routes = () => (
         <Route exact path="/" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/signup" component={SignUp} />
-        <PrivateRoute path="/home" component={Home} />
-        <PrivateRoute path="/maps" component={Maps} />
-        <PrivateRoute path="/events" component={Events} />
-        <PrivateRoute path="/games" component={Games} />
+        <Route path="/home" component={Home} />
+        <Route path="/maps" component={Maps} />
+        <Route path="/events" component={Events} />
+        <Route path="/games" component={Games} />
         <Route path="*" component={() => < h1 > Page not found </h1>} />
       </Switch>
       <ModalContainer />

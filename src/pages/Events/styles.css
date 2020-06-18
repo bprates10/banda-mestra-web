@@ -26,7 +26,7 @@
   border-radius: 2%;
   position: relative;
   /* height: 100%; */
-  margin: 1%;
+  margin: 0 1% 1% 1%;
   padding: 1%;
   width: 45%;
 }
@@ -37,15 +37,19 @@
   margin-top: 2%;
 }
 
-.events-form-separator {
-  padding: 3%;
+.events-form-separator>.left {
+  padding: 1%;
 }
 
 .events-form-separator>p {
   margin-bottom: 3%;
 }
 
-.events-form-separator>textarea {
+.events-form-separator>.left>p {
+  margin-bottom: 3%;
+}
+
+.events-form-separator>.left>textarea {
   width: 100% !important;
 }
 
@@ -56,7 +60,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 1%;
+  margin: 0 1% 1% 1%;
   padding-left: .5%;
   /* padding-right: 1%; */
   position: relative;

@@ -15,6 +15,18 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import AddIcon from '@material-ui/icons/Add';
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
 
+// grid add players
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+// import Checkbox from '@material-ui/core/Checkbox';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Button from '@material-ui/core/Button';
+
 // include css
 import './styles.css'
 
@@ -90,6 +102,94 @@ function Events(props) {
     },
   ];
 
+  // funcoes do grid add
+  function not(a, b) {
+    return a.filter((value) => b.indexOf(value) === -1);
+  }
+  function intersection(a, b) {
+    return a.filter((value) => b.indexOf(value) !== -1);
+  }
+  function union(a, b) {
+    return [...a, ...not(b, a)];
+  }
+  // vars do grid add
+  const [checked, setChecked] = React.useState([]);
+  const [left, setLeft] = React.useState([0, 1, 2, 3]);
+  const [right, setRight] = React.useState([4, 5, 6, 7]);
+  const leftChecked = intersection(checked, left);
+  const rightChecked = intersection(checked, right);
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+  const numberOfChecked = (items) => intersection(checked, items).length;
+  const handleToggleAll = (items) => () => {
+    if (numberOfChecked(items) === items.length) {
+      setChecked(not(checked, items));
+    } else {
+      setChecked(union(checked, items));
+    }
+  };
+  const handleCheckedRight = () => {
+    setRight(right.concat(leftChecked));
+    setLeft(not(left, leftChecked));
+    setChecked(not(checked, leftChecked));
+  };
+  const handleCheckedLeft = () => {
+    setLeft(left.concat(rightChecked));
+    setRight(not(right, rightChecked));
+    setChecked(not(checked, rightChecked));
+  };
+  const customList = (title, items) => (
+    <Card>
+      <CardHeader
+        // className={classes.cardHeader}
+        avatar={
+          <Checkbox
+            onClick={handleToggleAll(items)}
+            checked={numberOfChecked(items) === items.length && items.length !== 0}
+            indeterminate={numberOfChecked(items) !== items.length && numberOfChecked(items) !== 0}
+            disabled={items.length === 0}
+            inputProps={{ 'aria-label': 'Todos os Itens Selecionados' }}
+          />
+        }
+        title={title}
+        subheader={`${numberOfChecked(items)}/${items.length} selecionados`}
+      />
+      <Divider />
+      <List
+        // className={classes.list} 
+        dense component="div" role="list">
+        {items.map((value) => {
+          const labelId = `transfer-list-all-item-${value}-label`;
+
+          return (
+            <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
+              <ListItemIcon>
+                <Checkbox
+                  checked={checked.indexOf(value) !== -1}
+                  tabIndex={-1}
+                  disableRipple
+                  inputProps={{ 'aria-labelledby': labelId }}
+                />
+              </ListItemIcon>
+              <ListItemText id={labelId} primary={`Item ${value + 1}`} />
+            </ListItem>
+          );
+        })}
+        <ListItem />
+      </List>
+    </Card>
+  );
+
   function valueLabelFormat(value) {
     return marks.findIndex((mark) => mark.value === value) + 1;
   }
@@ -100,7 +200,7 @@ function Events(props) {
 
       <div className="events-content">
 
-        <p style={{ color: '#fff', paddingTop: '3%', fontSize: 40 }}>Criar Evento</p>
+        <p style={{ color: '#fff', paddingTop: '2%', fontSize: 40 }}>Criar Evento</p>
         <br />
 
         <div className="events-create">
@@ -110,46 +210,64 @@ function Events(props) {
 
             {/* event title */}
             <div className="events-form-separator">
-              <TextField
-                required
-                id="standard-required"
-                label="Título"
-                placeholder="Título do Evento"
-                fullWidth
-                value={title}
-                onChange={(e) => { setTitle(e.target.value) }}
-              />
+              <div className="left">
+                <TextField
+                  required
+                  id="standard-required"
+                  label="Título"
+                  placeholder="Título do Evento"
+                  fullWidth
+                  value={title}
+                  onChange={(e) => { setTitle(e.target.value) }}
+                />
+              </div>
 
             </div>
 
             {/* event description */}
             <div className="events-form-separator">
-
-              <p>Descrição do Evento:</p>
-              <TextareaAutosize
-                rowsMin={4}
-                rowsMax={4}
-                value={description}
-                onChange={(e) => { setDescription(e.target.value) }}
-                placeholder="Escreva aqui uma descrição para o evento :)"
-                style={{ backgroundColor: 'transparent', width: '80%' }}
-              />
+              <div className="left">
+                <p>Descrição do Evento:</p>
+                <TextareaAutosize
+                  rowsMin={4}
+                  rowsMax={4}
+                  value={description}
+                  onChange={(e) => { setDescription(e.target.value) }}
+                  placeholder="Escreva aqui uma descrição para o evento :)"
+                  style={{ backgroundColor: 'transparent', width: '80%' }}
+                />
+              </div>
 
             </div>
 
             {/* event observation */}
             <div className="events-form-separator">
+              <div className="left">
+                <p>Observações do Evento:</p>
+                {/* <textarea style={{ border: '1px dashed palegreen' }} /> */}
+                <TextareaAutosize
+                  rowsMin={4}
+                  rowsMax={4}
+                  value={observation}
+                  onChange={(e) => { setObservation(e.target.value) }}
+                  placeholder="Escreva aqui as observações (por exemplo, levar um refri ou salgadinho é legal :)"
+                  style={{ backgroundColor: 'transparent', width: '80%' }}
+                />
+              </div>
 
-              <p>Observações do Evento:</p>
-              {/* <textarea style={{ border: '1px dashed palegreen' }} /> */}
-              <TextareaAutosize
-                rowsMin={4}
-                rowsMax={4}
-                value={observation}
-                onChange={(e) => { setObservation(e.target.value) }}
-                placeholder="Escreva aqui as observações (por exemplo, levar um refri ou salgadinho é legal :)"
-                style={{ backgroundColor: 'transparent', width: '80%' }}
-              />
+            </div>
+
+            <div className="events-form-separator">
+              <div className="left">
+                <Autocomplete
+                  {...gameTypeProps}
+                  id="clear-on-escape"
+                  clearOnEscape
+                  renderInput={(params) => <TextField {...params} label="Modo de Jogo" margin="normal" />}
+                // value={gameTypeValue}
+                // onChange={(e) => { setGameTypeValue(e.target.value) }}
+                />
+              </div>
 
             </div>
 
@@ -160,22 +278,9 @@ function Events(props) {
 
             <div className="events-form-separator">
 
-              <Autocomplete
-                {...gameTypeProps}
-                id="clear-on-escape"
-                clearOnEscape
-                renderInput={(params) => <TextField {...params} label="Modo de Jogo" margin="normal" />}
-              // value={gameTypeValue}
-              // onChange={(e) => { setGameTypeValue(e.target.value) }}
-              />
-
-            </div>
-
-            <div className="events-form-separator">
-
               {/* <Typography id="discrete-slider-restrict" gutterBottom>
-                Número de Jogadores:
-                </Typography> */}
+              Número de Jogadores:
+              </Typography> */}
               <p>Número de Jogadores:</p>
 
               <Slider
@@ -205,15 +310,51 @@ function Events(props) {
 
             <div className="events-form-separator">
 
-              <p>Endereço:</p>
+              {/* <p>Endereço:</p>
               <input type="text" placeholder="Longitude" />
-              <input type="text" placeholder="latitude" />
+              <input type="text" placeholder="latitude" /> */}
+
+
+              <Grid container spacing={2} justify="center" alignItems="center" /*className={classes.root}*/ >
+
+                <Grid item>{customList('Títulos', left)}</Grid>
+
+                <Grid item>
+
+                  <Grid container direction="column" alignItems="center">
+
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      //className={classes.button}
+                      onClick={handleCheckedRight}
+                      disabled={leftChecked.length === 0}
+                      aria-label="move selected right"
+                    >
+                      &gt;
+                    </Button>
+
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      //className={classes.button}
+                      onClick={handleCheckedLeft}
+                      disabled={rightChecked.length === 0}
+                      aria-label="move selected left"
+                    >
+                      &lt;
+                    </Button>
+
+                  </Grid>
+
+                </Grid>
+
+                <Grid item>{customList('Xablau', right)}</Grid>
+
+              </Grid>
+
 
             </div>
-
-
-
-
 
           </div>
 
